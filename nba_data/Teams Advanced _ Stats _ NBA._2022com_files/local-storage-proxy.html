@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<!-- saved from url=(0083)https://neulionms-a.akamaihd.net/nbad/player/v1/nba/site_4/local-storage-proxy.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Endeavor Streaming Proxy</title>
+
+</head>
+<body>
+	<script type="text/javascript">		
+		function isLocalStorageEnabled(){try{return localStorage.setItem("_$TeSt%_",""),localStorage.removeItem("_$TeSt%_"),!0}catch(e){return!1}}function isAllowedOrigin(e){return e&&("https://nba.com"===e||e.endsWith(".nba.com")||e.endsWith(".neulion.com")||e.endsWith("localhost"))}function noLocalStorage(e){const t=e.data;switch(t.method){case"sget":case"lget":o={method:"return",key:t.key,value:null},e.source.postMessage(o,e.origin)}}function getFromLocalStorage(e){if(isAllowedOrigin(e.origin)){const o=e.data;switch(o.method){case"lset":localStorage.setItem(o.key,o.value);break;case"lget":const t={method:"return",key:o.key,value:localStorage.getItem(o.key)};e.source.postMessage(t,e.origin);break;case"lremove":localStorage.removeItem(o.key);break;case"sset":sessionStorage.setItem(o.key,o.value);break;case"sget":const a={method:"return",key:o.key,value:sessionStorage.getItem(o.key)};e.source.postMessage(a,e.origin);break;case"sremove":sessionStorage.removeItem(o.key)}}else noLocalStorage(e)}window.onmessage=isLocalStorageEnabled()?getFromLocalStorage:noLocalStorage;
+	</script>
+
+
+</body></html>

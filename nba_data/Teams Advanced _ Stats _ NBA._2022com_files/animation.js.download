@@ -1,0 +1,168 @@
+var txtTm       = 0.5;
+var lglTm       = 0.2;
+var beamTm      = 1.35;
+var bgTm        = 0.3;
+var noTm        = null;
+
+function masterTimeline(){
+    var masterTl    = new TimelineMax({});
+    masterTl    
+    .add(frameSwitch(platform.data['Frame-One']))
+    .add(frameSwitch(platform.data['Frame-Two']))
+    .add(frameSwitch(platform.data['Frame-Three']))
+    .add(frameSwitch(platform.data['End-Frame']))
+}
+
+function frameSwitch(frame){
+    TweenMax.set([crtv.viewport, crtv.banner, crtv.border], {autoAlpha:1});
+
+    var tl = new TimelineMax();
+    switch(frame){
+        case 'frameOne-intro': tl.add(frameIntro()); break;
+        case 'frameTwo-copyImg': tl.add(frameTwo()); break;
+        case 'frameThree-beam': tl.add(frameThree()); break;
+        case 'endFrame-cta': tl.add(endFrame()); break;
+        default: null;
+    }
+    return tl;
+}
+
+
+function frameIntro(){
+    var introTl = new TimelineMax(); 
+
+    TweenMax.set(['.F1'], {autoAlpha: 1});
+    TweenMax.set(['#T_Logo'], {x: 85});
+    TweenMax.set(['#logoClip1_2'], {clip:'rect(0px, 728px, 170px, 70px);'});
+
+    introTl
+    .from(['#T_Logo'], 0.6, {y: -20, opacity: 0, ease: Back.easeInOut})
+    .to(['#T_Logo'], 0.35, {x: 0, ease: Power2.easeOut}, 'logoSync+=.3')
+    .from(['#Mobile_Logo'], 0.35, {x: -150, opacity: 0, ease:Power2.easeOut}, 'logoSync+=.3')
+    .from(['#logoClip1_2'], 0.35, {clip:"rect(0px, 728px, 90px, 369px);", ease:Power2.easeOut}, 'logoSync+=.3')
+    .to(['#T_Logo', '#Mobile_Logo'], .5, {y: 50, opacity: 0, ease: Power4.easeIn}, '+=.6')
+    
+    return introTl; 
+}
+
+function frameTwo(){
+if(dynamicData["TMo_Postpaid_Cons_EL_Q322"][0]['F2-1_image-src_728x90'].indexOf('2569595_BackToSchool') > -1){
+    	document.getElementById("t_logo-img").style.display = "none";
+		document.getElementById("t_logo-bg").style.display = "none";
+		}
+    var d = 2.5;
+    var tl = new TimelineMax();
+    tl
+    .set(['.F2', '.t_logo'], {autoAlpha:1})
+    .from(['#F2-1_product'],  txtTm, {x:30, opacity:0, ease:Power2.easeOut}, 'prod')
+    .from(['#F2-1_copy'],  txtTm, {x:-30, opacity:0, ease:Power2.easeOut}, 'prod')
+    .from(['#F2-2_copy'],  txtTm, {x:-30, opacity:0, ease:Power2.easeOut}, '-=0.2')
+    .from(['#F2-3_copy'],  txtTm, {y:30, opacity:0, ease:Power2.easeOut}, '-=0.2')
+    .from(['#F2-1_largerLegal'],  lglTm, {opacity:0}, '-=0.2')
+    .from(['#F2-1_frameLegal'],  lglTm, {opacity:0}, '-=0.2')
+    
+    .set(['.F2', '.t_logo'], {autoAlpha:0, delay:d})
+    return tl;
+}
+
+function frameThree() {if(dynamicData["TMo_Postpaid_Cons_EL_Q322"][0]['F3-1_bg-src_728x90'].indexOf('2569595_BackToSchool') > -1){
+    	document.getElementById("t_logo-bg").style.display = "none";
+		}
+
+    if(document.querySelector("#F3-1_largerLegal").innerHTML.trim() !== ""){
+		document.querySelector("#F3-1_copy").style.lineHeight = "inherit";
+		document.querySelector("#F3-2_copy").style.lineHeight = "inherit";
+		document.querySelector("#F3-3_copy").style.lineHeight = "inherit";
+	}    
+
+    var d = 2.5;
+    var tl = new TimelineMax();
+    tl
+    .set(['.F3', '.t_logo'], {autoAlpha:1})
+    .from(['#F3-1_bg'], 0.3, {opacity:0, ease:Power2.easeIn}, 'logo')
+    .from(['#F3-2_bg'], 1.35, {opacity:0, ease:Power2.easeOut}, 'logo+=0.3')
+    .from(['#F3-1_copy'],  0.5, {opacity:0, ease:Power2.easeOut}, 'prod-=1.15')
+    .from(['#F3-2_copy'],  0.5, {x:30, opacity:0, ease:Power2.easeOut}, '-=0.85')
+    .from(['#F3-3_copy'],  0.5, {y:30, opacity:0, ease:Power2.easeOut}, 'legal-=0.85')
+    .from(['#F3-1_frameLegal', '#F3-1_largerLegal'],  0.2, {opacity:0}, '-=0.3')
+    .set(['.F3', '.t_logo'], {autoAlpha:0, delay:d})
+    return tl;
+}
+
+function endFrame(){
+if(dynamicData["TMo_Postpaid_Cons_EL_Q322"][0]['EF-1_image-src_728x90'].indexOf('2031617_PhoneDisplay')> -1 || dynamicData["TMo_Postpaid_Cons_EL_Q322"][0]['EF-1_image-src_728x90'].indexOf('2154524_KeepSwitchRefresh')> -1 || dynamicData["TMo_Postpaid_Cons_EL_Q322"][0]['EF-1_image-src_728x90'].indexOf('2402244_Matterhorn') > -1 || dynamicData["TMo_Postpaid_Cons_EL_Q322"][0]['EF-1_image-src_728x90'].indexOf('2355650') > -1){
+        document.getElementById("EF-box").style.height = "0px";
+        document.getElementById("t-mobile_logo").style.display = "none";
+        document.getElementById("CTA-bound").style.display = "none";
+       }   
+if(dynamicData["TMo_Postpaid_Cons_EL_Q322"][0]['EF-1_image-src_728x90'].indexOf('2569595_BackToSchool') > -1){
+		document.getElementById("EF-box").style.height = "0px";
+        document.getElementById("t-mobile_logo").style.display = "none";
+        document.getElementById("CTA-bound").style.display = "none";
+       } 
+
+var tl = new TimelineMax({onComplete:ctaAnimation});
+    tl
+    .set([".EF", "#t-mobile_logo"], {autoAlpha:1})
+    .set(["#EF-1_frameLegal", "#EF-1_largerLegal"], {autoAlpha:0})
+    .from(["#EF-1_product"],  0.5, {x:30, opacity:0, ease:Power2.easeOut}, "prod")
+    .from(["#EF-1_copy"],  0.5, {x:-30, opacity:0, ease:Power2.easeOut}, "prod")
+    .from(["#EF-2_copy"],  0.5, {x:-30, opacity:0, ease:Power2.easeOut}, "-=0.2")
+    .from(["#EF-3_copy"],  0.5, {x:-30, opacity:0, ease:Power2.easeOut}, "-=0.2")
+
+    return tl;
+}
+
+function ctaAnimation () {  
+   if(document.querySelector("#CTA-1_copy").innerHTML == ""){
+            document.querySelector("#CTA-1_copy").style.display = "none";
+        } 
+
+var tl = new TimelineMax({});
+    tl.set([".CTA"], {autoAlpha:1}).from(["#CTA-1_copy"],  0.4, {rotationX:90, transformOrigin:"0 bottom", perspective:400, rotation:0.001, force3D:true}, "cta")
+    legalAnim();
+}
+
+function legalAnim() {
+    var EFflH = elById('EF-1_frameLegal').offsetHeight;
+    var EFfl = elById('EF-1_frameLegal').innerHTML;
+        EFfl = EFfl.replace(/(^\s*)|(\s*$)/gi,"");
+        EFfl = EFfl.replace(/[ ]{2,}/gi," ");
+        EFfl = EFfl.replace(/\n /,"\n");
+        
+    var legalLim  = 200;
+    var curChar = elById('EF-1_frameLegal').textContent.split(' ').length;
+    var legalSl = '';
+
+    var legalCut = 190;
+    var slicedLegal = '';
+    var scrollTime = 3;
+
+    for (var i = 0; i < EFfl.split(' ').length; i++) {
+        if(elById('EF-1_frameLegal').textContent.split(' ')[i] !== undefined){
+            curChar += elById('EF-1_frameLegal').textContent.split(' ')[i].length;
+            legalSl += elById('EF-1_frameLegal').textContent.split(' ')[i] + ' ';
+        }        
+        if(curChar <= legalCut){slicedLegal += elById('EF-1_frameLegal').innerHTML.split(' ')[i] + ' ';}
+        if(curChar >= legalLim){
+            TweenMax.to(["#EF-1_frameLegal", "#EF-1_largerLegal"], 0.3, {autoAlpha:1})
+            TweenMax.to(["#EF-frameLegal"],  scrollTime, {scrollTo:{y:EFflH}, autoAlpha:1, delay:0.5, ease:Power0.easeNone, onComplete:function(){
+                setSlicedLegal(EFfl, slicedLegal);
+            }, onCompleteParams:[legalSl]});
+        }
+    }  
+
+    TweenMax.set(["#EF-1_frameLegal", "#EF-1_largerLegal"], {autoAlpha:1, onComplete:addLegalEvents})
+}
+
+function setSlicedLegal(EFfl, slicedLegal){
+    if(EFfl.includes('Ver términos')){elById('EF-1_frameLegal').innerHTML = fixHtml(slicedLegal) + "..." + '<a><u>Ver términos.</u></a>'; addLegalEvents();}
+    else if(EFfl.includes('See Terms')){elById('EF-1_frameLegal').innerHTML = fixHtml(slicedLegal) + "..." + '<a><u>See Terms.</u></a>'; addLegalEvents();}
+}
+
+function fixHtml(html){ var div = document.createElement('div'); div.innerHTML = html; return (div.innerHTML); }
+
+function addLegalEvents(){ if(document.querySelectorAll('#EF-1_frameLegal a').length >= 1){ crtv.legalBut = document.querySelectorAll('#EF-1_frameLegal a')[0]; crtv.rollOvOn = elById("RO"); crtv.legalBut.addEventListener("mouseover", legalIn); crtv.legalBut.addEventListener("click", legalStay); } }
+function legalIn () {TweenMax.to(["#EF-1_frameLegal a"], 0.2, {opacity:0}); TweenMax.set(["#RO"], {pointerEvents:"none"});     TweenMax.set(["#RO"], {autoAlpha:1, y:0, onComplete:function(){TweenMax.set(["#RO-arrow"], {y:0, opacity:1}); TweenMax.from(["#RO-arrow"], 0.5, {y:4, yoyo:true, repeat:2, opacity:0.5}); }});  TweenMax.from(["#RO"],  0.2, {autoAlpha:0, y:crtv.height}); crtv.legalBut.addEventListener("mouseout", legalOut); }
+function legalStay () { TweenMax.set(["#RO"], {autoAlpha:1, pointerEvents:"auto"}); addClass(crtv.legalBut, "clicked"); crtv.rollOvOn.addEventListener("click", legalOut); if(hasClass(crtv.legalBut, "clicked")){ crtv.legalBut.removeEventListener("mouseout", legalOut); crtv.legalBut.removeEventListener("mouseover", legalIn); } }
+function legalOut () {TweenMax.to(["#EF-1_frameLegal a"], 0.2, {opacity:1}); TweenMax.to(["#RO"],  0.2, {autoAlpha:0, y:crtv.height, pointerEvents:"none"}); removeClass(crtv.legalBut, "clicked"); crtv.rollOvOn.removeEventListener("click", legalOut); crtv.legalBut.addEventListener("mouseover", legalIn); crtv.legalBut.addEventListener("mouseout", legalOut); }
