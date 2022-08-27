@@ -5,42 +5,42 @@
 We have been hired by Caesars Sportsbook to answer two questions: 
 How accurate can a game prediction model perform?
 Can the game predictor be used to make sports betting more accessible? 
-![Alt image](./images/gambling_las_vegas.png)
+![Alt image](./images/gambling_las_vegas.jpg)
 
 ## Data
 We compiled 6 year regular seasons game data from 2016-17 to 2021-22. Data can be found in `nba.csv` in the data folder in this project's [GitHub](https://github.com/alvaromendizabal/NBA_Prediction_Model) repository. The descriptions of the column names can be found in the [glossary](https://www.nba.com/stats/help/glossary/). We webscraped game data from [NBA.com](https://www.nba.com/stats/) using the [NBA API](http://nbasense.com/nba-api/).
 
 ## Methodology
-We used pandas and numpy explore the data. Sklearn to run models and determine accuracy scores. Matplotlib and seaborn were used for visualizations. We engineered features like last 10 games win percentage and Elo rating for both the home and away teams. Next we ran a train-test split on the data to avoid data leakage. Additionally, we standard scaled our train and test, ran numerous models using Logistic Regression, Ridge, Random Forest Classifier, K Nearest Neighbors, Gradient Boosting, Gaussian Naive Bayes, and SVM. We optimized the model parameters using Grid Seearch and Random Grid Search.
-![Alt text](./images/Corelation_Heatmap_2.png)
+We used pandas and numpy explore the data. Sklearn to run models and determine accuracy scores. Matplotlib and seaborn were used for visualizations. We engineered features like last 10 games win percentage and Elo rating for both the home and away teams. Next we ran a train-test split on the data to avoid data leakage. Additionally, we standard scaled our train and test, ran numerous models using Logistic Regression, Ridge, Random Forest Classifier, K Nearest Neighbors, Gradient Boosting, Gaussian Naive Bayes, and SVM. We optimized the model parameters using Grid Search and Random Grid Search.
 
 ## Features
 We tested multiple models and combinations and found a few features that effected the prediction of a win or loss for the home team.
 ![Alt image](./images/Feature_Importance.png)
 
-First we have Elo rating. For those new to Elo, here are its essential features:
-Elo ratings depend on the final score of a game and where it was played (home-court advantage). Elo includes both regular-season and playoff games.
-Teams gain Elo points after winning and lose points after losing. A team gains more points for an upset win and for winning by wide margins.
-Elo system is zero-sum. When the Golden State Warriors were on their historic run during the 2015-16 season they had a record of 73-9 and the 2nd highest Elo rating in NBA history at 1839. During those NBA Finals the Warriors started with a 3-1 series lead against the Cleveland Cavaliers. In the end, the Cavaliers pulled off a huge upset and actually won the championship, the Warriors never passed the 1995-96 Chicago Bulls 1853 Elo peak, and their Elo had dropped to 1756.
-Ratings are tied to game-by-game rather than a season-by-season performance. So we can see changes in a team’s “form” over the course of the season.
+First we have Elo rating. For those new to Elo, here are its essential features:<br />
+Ratings are tied to game-by-game rather than a season-by-season performance. So we can see changes in a team’s “form” over the course of the season.<br />
+Elo ratings depend on the final score of a game and where it was played (home-court advantage). Elo includes both regular-season and playoff games.<br />
+Teams gain Elo points after winning and lose points after losing. A team gains more points for an upset win and for winning by wide margins.<br />
+Elo system is zero-sum. When the Golden State Warriors were on their historic run during the 2015-16 season they had a record of 73-9 and the 2nd highest Elo rating in NBA history at 1839. During those NBA Finals the Warriors started with a 3-1 series lead against the Cleveland Cavaliers. In the end, the Cavaliers pulled off a huge upset and actually won the championship, the Warriors never passed the 1995-96 Chicago Bulls 1853 Elo peak, and their Elo had dropped to 1756.<br />
 The long-term average Elo rating is 1500, although it may vary in any particular year depending on how recently the league has expanded. Over 90% of team ratings are between 1300 (awful) and 1700 (great), but historically terrible or great teams may fall outside that range.
 ![Alt image](./images/Elo_all_teams.jpg)
 
 
-Another important feature is defensive rating. Basketball stresses efficiency. Minimizing points allowed and maximizing points scored on each possession is more important than overall totals. Totals are shaped by variables like pace — or the number of possessions a team gets in a game — which differs depending on coaching (i.e. the Golden State Warriors averaged 3 fewer possessions per game than the Los Angeles Lakers last season).
+Another important feature is defensive rating. Basketball stresses efficiency. Minimizing points allowed and maximizing points scored on each possession is more important than overall totals. Totals are shaped by variables like pace — or the number of possessions a team gets in a game — which differs depending on coaching (i.e. the Golden State Warriors averaged 3 fewer possessions per game than the Los Angeles Lakers last season).<br />
 
 This is where tempo-free stats offensive and defensive rating come into play. Defensive rating shows how many points a player allows per 100 possessions. This statistic functions differently than a plus/minus system, where all points scored while a player is on the court count against them. Only the shots that are scored as a result of their defensive lapses are counted against them.
-![Alt image](./images/off_rating.png)
-
-A third important feature was offensive rating. Offensive rating is simpler to calculate. It's just the amount of points produced by a player per 100 possessions. Again, the reason offensive and defensive ratings are useful is because they're tempo-free stats. Offensive and defensive rating eliminate factors like pace of play and minutes played per game. Below is the formula for offensive rating:
-$$ \frac{100*pp} {fga + .44 * fta + to}$$
 ![Alt image](./images/def_rating.png)
+
+
+A third important feature was offensive rating. Offensive rating is simpler to calculate. It's just the amount of points produced by a player per 100 possessions. Again, the reason offensive and defensive ratings are useful is because they're tempo-free stats. Offensive and defensive rating eliminate factors like pace of play and minutes played per game.
+![Alt image](./images/off_rating.png)
 
 Another feature of note was true shooting percentage. There are 3 ways that an NBA player can score: 3-pointers, 2-pointers and free throws. True shooting percentage ('TS_PCT') looks at all three. 3-pointers are a little tricky to factor into the equation. The max true shooting percentage  is 150% and can only be reached if a player hits every one of their shots and they're all from behind the arch. Because this stat accounts for all shots, it's easily the best measure of shooting ability. 
 
 For example, if a player goes 1-for-1 and their only shot is from the hash-mark, the formula will read and simplify as follows (please just trust and accept that the .44 multiplier is the best way of estimating the total number of possessions a player is involved in)
 $$\frac{points} {2 *fga + .44 * fta}$$
 $$\frac{3}  {2 * 1 + .44 * 0} = \frac{3}{2} = {1.5}$$
+
 ![Alt image](./images/true_shooting.png)
 
 ## Model
