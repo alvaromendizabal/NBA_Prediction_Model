@@ -51,9 +51,9 @@ $$\frac{3}  {2 * 1 + .44 * 0} = \frac{3}{2} = {1.5}$$
 ![Alt image](./images/true_shooting.png)
 
 ## Model
-The best performing model was a Logistic Regression. We used Polynomial Features, Standard Scaler, Principal Component Analysis then ran the Logistic Regression. Plug in all the features shown above into our model and we can predict whether the home team wins or loses with 67.39% accuracy. Instead of plugging in the actual game stats, we can plug in the team’s stat averages and ratings based off the prior game or last 10 games. Then our model would output whether the home team is the projected winner or not.
+The best performing model was Ridege. Plug in all the features shown above into our model and we can predict whether the home team wins or loses with 67% accuracy. Instead of plugging in the actual game stats, we can plug in the team’s stat averages and ratings based off the prior game or last 10 games. Then our model would output whether the home team is the projected winner or not.
 ![Alt image](./images/classification_report.png)
-![Alt image](./images/Confusion_Matrix.png)
+![Alt image](./images/Confusion_Matrix_Best_Model.png)
 
 ## Conclusions
 The NBA has a global audience. Each game draws in 105 million viewers worldwide and in the US most of the views are in California. Fans like to speculate over games. Fans place their bets blinded by team allegiance and without any scientific basis, and typically lose on inaccurate predictions.
