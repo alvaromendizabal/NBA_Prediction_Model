@@ -51,12 +51,12 @@ $$\frac{3}  {2 * 1 + .44 * 0} = \frac{3}{2} = {1.5}$$
 ![Alt image](./images/true_shooting.png)
 
 ## Model
-The best performing model was Ridege. Plug in all the features shown above into our model and we can predict whether the home team wins or loses with 67% accuracy. Instead of plugging in the actual game stats, we can plug in the team’s stat averages and ratings based off the prior game or last 10 games. Then our model would output whether the home team is the projected winner or not.
+The best performing model was Ridge with Polynomial Features and Standard Scaler. Plug in all the features shown above into our model and we can predict whether the home team wins or loses with 67% accuracy. Instead of plugging in the actual game stats, we can plug in the team’s stat averages and ratings based off the prior game or last 10 games. Then our model would output whether the home team is the projected winner or not.
 ![Alt image](./images/classification_report.png)
 ![Alt image](./images/Confusion_Matrix_Best_Model.png)
 
 ## Conclusions
-The NBA has a global audience. Each game draws in 105 million viewers worldwide and in the US most of the views are in California. Fans like to speculate over games. Fans place their bets blinded by team allegiance and without any scientific basis, and typically lose on inaccurate predictions.
+The NBA has a global audience. Each game draws in 105 million viewers worldwide and in the United States most of the views are in California. Fans like to speculate over games. Fans place their bets blinded by team allegiance and without any scientific basis, and typically lose on inaccurate predictions.
 
 ![Alt image](./images/sports_betting_mobile_money.jpg)
 With our model, forecasting the game results with accuracy is feasible and promises untold economic significance to the sports betting industry. Billions were made off mobile sports gambling last year. Just look at New Jersey. Over 10 billion. And this November California is likely to open those flood gates by passing legislation legalizing sports betting. This is a massive opportunity for Caesars Sportsbook. California is not only the most populous and prosperous state, it’s also home to the biggest NBA franchises, the Los Angeles Lakers and Golden State Warriors. Don’t you think fans are eager to know who might win tonight’s game? Fans would be more inclined to place a bet if the odds were ever in their favor.
